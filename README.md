@@ -10,6 +10,6 @@ Source code for the 5th project of the Introduction to Artificial Intelligence c
 3. Install .venv by running `python -m venv .venv`
 4. Install dependencies by running `pip install -r requirements.txt`
 5. Input propositional logic in `Input.txt`
-6. Mark folder `src` folder source root
+6. Mark folder `src` as the source root
 7. Run the program by running `python src/main.py`
 8. The result will be printed in the console and saved in `Output.txt`

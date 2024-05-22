@@ -1,16 +1,33 @@
-# This is a sample Python script.
+from logic import *
 
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
-
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
+INPUT_FILE_PATH = "IO/Input.txt"
+OUTPUT_FILE_PATH = "IO/Output.txt"
 
 
-# Press the green button in the gutter to run the script.
+def input_data(kb, file_path):
+    with open(file_path, 'r') as file:
+        query = file.readline().strip()
+        n = int(file.readline())
+        for _ in range(n):
+            str_clause = file.readline().strip()
+            clause = Clause.parse(str_clause)
+            kb.tell(clause)
+            # print(sentence)
+        # print(query)
+        # print(kb.clauses)
+        return query, kb
+
+
+def output_data(kb, query, file_path):
+    with open(file_path, 'w') as file:
+        pl_resolution_to_file(kb, query, file)
+
+
+def main():
+    kb = PropKB()
+    query, kb = input_data(kb, INPUT_FILE_PATH)
+    output_data(kb, query, OUTPUT_FILE_PATH)
+
+
 if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
+    main()
