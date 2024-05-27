@@ -27,7 +27,14 @@ def main():
     kb = PropKB()
     query, kb = input_data(kb, INPUT_FILE_PATH)
     output_data(kb, query, OUTPUT_FILE_PATH)
-
+    # print(CNFSentence.parse(-Expr.parse("A OR B")))
+    # print(CNFSentence.parse(Expr.parse("A OR (B AND C)")))
+    # print(CNFSentence.parse(-Expr.parse("A OR (B AND C)")))
+    # print(CNFSentence.parse(-Expr.parse("(-A AND (B OR -C) AND D) OR E")))
+    # print(CNFSentence.parse(-Expr.parse("-( A => B )")))
+    # print(CNFSentence.parse(Expr.parse("( - A AND ( B OR - C ) => D ) <=> E")))
+    # print(CNFSentence.parse(Expr.parse(" ( C OR (- A OR B) ) AND (A OR C OR B)")))
+    # print (CNFSentence.parse(Expr.parse("A OR (B AND C) OR D")))
 
 if __name__ == '__main__':
     main()
