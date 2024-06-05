@@ -1,4 +1,3 @@
-import queue
 import re
 
 SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZ"
@@ -483,8 +482,7 @@ def pl_resolve(ci, cj):
 
 
 def pl_resolution(kb, alpha):
-    raise NotImplementedError
-    clauses = kb.clauses + [-Clause.parse(alpha)]
+    clauses = kb.clauses + CNFSentence.parse(-Expr.parse(alpha)).clauses
     new = set()
     while True:
         n = len(clauses)
@@ -506,16 +504,19 @@ def pl_resolution_to_file(kb, alpha, output):
         n = len(clauses)
         pairs = [(clauses[i], clauses[j])
                  for i in range(n) for j in range(i + 1, n)]
+        new_resolvents = []
         for ci, cj in pairs:
             resolvents = pl_resolve(ci, cj)
-            if any([clause.is_empty() for clause in resolvents]):
-                new_clauses = [l for l in resolvents if l not in clauses]
-                output.write(str(new_clauses.__len__()) + "\n")
-                for clause in new_clauses:
-                    output.write(str(clause) + "\n")
-                output.write("YES\n")
-                return
+            new_resolvents += resolvents
             new.update(resolvents)
+        new_resolvents = list(set(new_resolvents))
+        if any([clause.is_empty() for clause in new_resolvents]):
+            new_clauses = [l for l in new_resolvents if l not in clauses]
+            output.write(str(new_clauses.__len__()) + "\n")
+            for clause in new_clauses:
+                output.write(str(clause) + "\n")
+            output.write("YES\n")
+            return
         if new.issubset(set(clauses)):
             output.write("NO\n")
             return

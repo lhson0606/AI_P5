@@ -36,5 +36,6 @@ def main():
     # print(CNFSentence.parse(Expr.parse(" ( C OR (- A OR B) ) AND (A OR C OR B)")))
     # print (CNFSentence.parse(Expr.parse("A OR (B AND C) OR D")))
 
+
 if __name__ == '__main__':
     main()
