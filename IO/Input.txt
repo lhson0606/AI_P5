@@ -1,6 +1,10 @@
-A
+-A
 4
 -A OR B
 -C OR B
 A OR C OR -B
 -B
+
+
+
+

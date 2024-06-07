@@ -1,6 +1,10 @@
-4
+3
 {-C}
-{A OR C}
 {-A}
+{B}
+4
+{C OR A}
+{-B OR C}
+{-B OR A}
 {}
 YES

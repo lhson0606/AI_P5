@@ -168,7 +168,8 @@ def distribute_and_over_or(clause_expr):
     if clause_expr.op == "":
         return clause_expr
     if clause_expr.op == OR_OPERATOR:
-        assert len(clause_expr.args) == 2 and "Invalid clause_expr expression"
+        if len(clause_expr.args) > 2:
+            return distribute_and_over_or(ClauseExpr(OR_OPERATOR, [clause_expr.args[0], distribute_and_over_or(ClauseExpr(OR_OPERATOR, clause_expr.args[1:]))]))
 
         e1 = clause_expr.args[0]
         e2 = clause_expr.args[1]
@@ -412,7 +413,9 @@ def associate_or_operator(clause_expr):
             else:
                 associate_or_operator(arg)
 
-        clause_expr.args.append(collapsed_expr)
+        if collapsed_expr.args.literals.__len__() > 0:
+            clause_expr.args.append(collapsed_expr)
+
     else:
         for arg in clause_expr.args:
             associate_or_operator(arg)
