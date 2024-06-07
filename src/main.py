@@ -20,13 +20,21 @@ def input_data(kb, file_path):
 
 def output_data(kb, query, file_path):
     with open(file_path, 'w') as file:
-        pl_resolution_to_file(kb, query, file)
+        try:
+            pl_resolution_to_file(kb, query, file)
+        except Exception as e:
+            file.write(str(e))
 
 
 def main():
-    kb = PropKB()
-    query, kb = input_data(kb, INPUT_FILE_PATH)
-    output_data(kb, query, OUTPUT_FILE_PATH)
+    try:
+        kb = PropKB()
+        query, kb = input_data(kb, INPUT_FILE_PATH)
+        output_data(kb, query, OUTPUT_FILE_PATH)
+    except Exception as e:
+        print(e)
+        # pause console for user to see the error message
+        input("Press Enter to continue...")
     # print(CNFSentence.parse(-Expr.parse("A <=> B")))
     # print(CNFSentence.parse(Expr.parse("A OR (B AND C)")))
     # print(CNFSentence.parse(-Expr.parse("A OR (B AND C)")))
